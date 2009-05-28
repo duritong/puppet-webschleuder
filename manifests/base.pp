@@ -7,6 +7,8 @@ class webschleuder::base {
   include rubygems::markaby
   include rubygems::rack
 
+  include rubygems::sqlite
+
   if $webschleuder_install_dir == '' {
     $webschleuder_install_dir  = '/opt/webschleuder'
   }
