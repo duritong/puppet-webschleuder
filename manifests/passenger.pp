@@ -12,4 +12,8 @@ class webschleuder::passenger {
     require => User::Managed['schleuder'],
     owner => schleuder, group => 0, mode => 0600;
   }
+  file{'/opt/webschleuder/config.ru':
+    require => Git::Clone['webschleuder'],
+    owner => schleuder, group => 0, mode => 0644;
+  }
 }

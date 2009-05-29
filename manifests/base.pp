@@ -17,6 +17,7 @@ class webschleuder::base {
     git_repo => 'git://git.immerda.ch/webschleuder.git',
     projectroot => $webschleuder_install_dir,
     cloneddir_group => 'schleuder',
+    cloneddir_restrict_mode => false,
     require => [ User::Managed['schleuder'], Package['camping'], Package['markaby'], Package['activerecord'] ]
   }
 
