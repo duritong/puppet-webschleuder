@@ -4,12 +4,12 @@
 define webschleuder::list(
   $ensure = present,
   $password,
-  $password_iscrypted = true,
+  $password_encrypted = true,
   $force_password = false
 ){
   include webschleuder
 
-  if ($password_iscrypted == false) and $force_password {
+  if ($password_encrypted == false) and $force_password {
     fail("it's not possible to enforcen an unencrypted password for ${name} on ${fqdn}")
   }
 
@@ -19,7 +19,7 @@ define webschleuder::list(
     } else {
       $force_str = ""
     }
-    if $password_iscrypted {
+    if $password_encrypted {
       $pwd_str = "-encrypted"
     } else {
       $pwd_str = ""
@@ -31,7 +31,7 @@ define webschleuder::list(
     }
     
     if $force_password {
-      if $password_iscrypted {
+      if $password_encrypted {
         Exec["manage_webschleuder_${name}"]{
           unless => "grep -qE '${password}' /var/schleuderlists/${name}/web.conf",
         }
