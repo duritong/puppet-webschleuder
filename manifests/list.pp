@@ -26,7 +26,7 @@ define webschleuder::list(
     }
 
     exec{"manage_webschleuder_${name}":
-      command => "ruby /opt/webschleuder/contrib/enable_webschleuder.rb ${name} ${password} ${pwd_str} {force_str}",
+      command => "ruby /opt/webschleuder/contrib/enable_webschleuder.rb ${name} ${password} ${pwd_str} ${force_str}",
       require => Exec["manage_schleuder_list_${name}"],
     }
     
