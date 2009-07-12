@@ -29,6 +29,12 @@ define webschleuder::list(
       command => "ruby /opt/webschleuder/contrib/enable_webschleuder.rb ${name} '${password}' ${pwd_str} ${force_str}",
       require => Exec["manage_schleuder_list_${name}"],
     }
+    file{"/var/schleuderlists/${name}/web.conf":
+      ensure => file,
+      replace => false,
+      require => Exec["manage_webschleuder_${name}"],
+      owner => schleuder, group => 0, mode => 0600;
+    }
     
     if $force_password {
       if $password_encrypted {
