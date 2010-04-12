@@ -1,5 +1,5 @@
 class webschleuder::base {
-  include schleuder
+  require schleuder
 
   include rubygems::activerecord
   include rubygems::bcrypt
@@ -18,7 +18,7 @@ class webschleuder::base {
     projectroot => $webschleuder_install_dir,
     cloneddir_group => 'schleuder',
     cloneddir_restrict_mode => false,
-    require => [ User::Managed['schleuder'], Package['camping'], Package['markaby'], Package['activerecord'] ]
+    require => [ Package['camping'], Package['markaby'], Package['activerecord'] ]
   }
 
   file{'/etc/schleuder/webschleuder.conf':
