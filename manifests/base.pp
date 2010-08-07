@@ -22,9 +22,9 @@ class webschleuder::base {
   }
 
   file{'/etc/schleuder/webschleuder.conf':
-    source => [ "puppet://$server/modules/site-webschleuder/config/${fqdn}/webschleuder.conf",
-                "puppet://$server/modules/site-webschleuder/config/webschleuder.conf",
-                "puppet://$server/modules/webschleuder/config/webschleuder.conf" ],
+    source => [ "puppet:///modules/site-webschleuder/config/${fqdn}/webschleuder.conf",
+                "puppet:///modules/site-webschleuder/config/webschleuder.conf",
+                "puppet:///modules/webschleuder/config/webschleuder.conf" ],
     owner => root, group => schleuder, mode => 0640;
   }
 }
