@@ -26,7 +26,7 @@ define webschleuder::list(
     }
 
     case $password {
-      'trocla': { $real_password = trocla("schleuder_${name}",'bcrypt') }
+      'trocla': { $real_password = trocla("webschleuder_${name}",'bcrypt') }
       default: { $real_password = $password }
     }
 
