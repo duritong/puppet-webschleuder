@@ -25,8 +25,13 @@ define webschleuder::list(
       $pwd_str = ""
     }
 
+    case $password {
+      'trocla': { $real_password = trocla("schleuder_${name}",'bcrypt') }
+      default: { $real_password = $password }
+    }
+
     exec{"manage_webschleuder_${name}":
-      command => "ruby /opt/webschleuder/contrib/enable_webschleuder.rb ${name} '${password}' ${pwd_str} ${force_str}",
+      command => "ruby /opt/webschleuder/contrib/enable_webschleuder.rb ${name} '${real_password}' ${pwd_str} ${force_str}",
       require => Exec["manage_schleuder_list_${name}"],
     }
     file{"/var/schleuderlists/${name}/web.conf":
@@ -39,7 +44,7 @@ define webschleuder::list(
     if $force_password {
       if $password_encrypted {
         Exec["manage_webschleuder_${name}"]{
-          unless => "grep -qE '${password}' /var/schleuderlists/${name}/web.conf",
+          unless => "grep -qE '${real_password}' /var/schleuderlists/${name}/web.conf",
         }
       }
     } else {
