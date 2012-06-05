@@ -10,7 +10,7 @@ define webschleuder::list(
   include webschleuder
 
   if ($password_encrypted == false) and $force_password {
-    fail("it's not possible to enforcen an unencrypted password for ${name} on ${fqdn}")
+    fail("it's not possible to enforcen an unencrypted password for ${name} on ${::fqdn}")
   }
 
   if $ensure == present {
